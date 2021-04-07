@@ -4,6 +4,7 @@
   "description": "Modern version of https://github.com/emn178/js-md5",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "types": "dist/types/md5.d.ts",
   "scripts": {
     "build": "tsc && rollup -c"
   },
