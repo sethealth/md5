@@ -1,6 +1,6 @@
 {
   "name": "@sethealth/md5",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Modern version of https://github.com/emn178/js-md5",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
