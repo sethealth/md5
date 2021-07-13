@@ -6,7 +6,8 @@
   "module": "dist/index.esm.js",
   "types": "dist/types/md5.d.ts",
   "scripts": {
-    "build": "tsc && rollup -c"
+    "build": "tsc && rollup -c",
+    "release": "np"
   },
   "keywords": [
     "md5"
@@ -14,6 +15,7 @@
   "author": "Sethealth Team",
   "license": "MIT",
   "devDependencies": {
+    "np": "^7.5.0",
     "rollup": "^2.44.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.2.3"
