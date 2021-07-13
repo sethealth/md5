@@ -8,9 +8,8 @@
  * @license MIT
  */
 const EXTRA = [128, 32768, 8388608, -2147483648];
-const BASE64_ENCODE_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
 
-export const createMd5 = () => {
+export const createMD5 = () => {
   const buffer = new ArrayBuffer(68);
   const buffer8 = new Uint8Array(buffer);
   const blocks = new Uint32Array(buffer);
@@ -267,53 +266,23 @@ export const createMd5 = () => {
    * @memberof Md5
    * @instance
    * @description Output hash as bytes array
-   * @returns {Array} Bytes array
+   * @returns {Uint8Array} Bytes array
    * @see {@link md5.digest}
    * @example
    * hash.digest();
    */
   const digest = () => {
     finalize();
-    return [
+    return new Uint8Array([
       h0 & 0xFF, (h0 >> 8) & 0xFF, (h0 >> 16) & 0xFF, (h0 >> 24) & 0xFF,
       h1 & 0xFF, (h1 >> 8) & 0xFF, (h1 >> 16) & 0xFF, (h1 >> 24) & 0xFF,
       h2 & 0xFF, (h2 >> 8) & 0xFF, (h2 >> 16) & 0xFF, (h2 >> 24) & 0xFF,
       h3 & 0xFF, (h3 >> 8) & 0xFF, (h3 >> 16) & 0xFF, (h3 >> 24) & 0xFF
-    ];
+    ]);
   };
-
-  /**
-   * @method base64
-   * @memberof Md5
-   * @instance
-   * @description Output hash as base64 string
-   * @returns {String} base64 string
-   * @see {@link md5.base64}
-   * @example
-   * hash.base64();
-   */
-  const base64 = () => {
-    const digestBytes = digest();
-    let v1, v2, v3, base64Str = '';
-    for (var i = 0; i < 15;) {
-      v1 = digestBytes[i++];
-      v2 = digestBytes[i++];
-      v3 = digestBytes[i++];
-      base64Str += BASE64_ENCODE_CHAR[v1 >>> 2] +
-        BASE64_ENCODE_CHAR[(v1 << 4 | v2 >>> 4) & 63] +
-        BASE64_ENCODE_CHAR[(v2 << 2 | v3 >>> 6) & 63] +
-        BASE64_ENCODE_CHAR[v3 & 63];
-    }
-    v1 = digestBytes[i];
-    base64Str += BASE64_ENCODE_CHAR[v1 >>> 2] +
-      BASE64_ENCODE_CHAR[(v1 << 4) & 63] +
-      '==';
-    return base64Str;
-  }
 
   return {
     update,
-    base64,
     digest,
   };
 }
